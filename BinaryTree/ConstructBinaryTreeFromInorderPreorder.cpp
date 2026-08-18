@@ -26,6 +26,24 @@ public:
     }
 };
 
+//Traversal to verify the buildTree result
+void inorderTraversal(TreeNode* root)
+{
+    if(root == NULL)return;
+    inorderTraversal(root->left);
+    cout<<root->val<<" ";
+    inorderTraversal(root->right);
+}
+
+void preorderTraversal(TreeNode* root)
+{
+    if(root == NULL)return;
+    cout<<root->val<<" ";
+    preorderTraversal(root->left);
+    preorderTraversal(root->right);
+}
+
+
 TreeNode* buildTree(vector<int>&preorder, int preStart, int preEnd, vector<int>&inorder, int inStart, int inEnd, map<int, int>&inorderMap)
 {
     if(preStart > preEnd || inStart > inEnd)return NULL;
@@ -61,5 +79,11 @@ int main()
     vector<int> preorder = {3,9,20,15,7}, inorder = {9,3,15,20,7};
 
     TreeNode *root = buildTree(preorder, inorder);
+
+    cout<<"\nInorderTraversal: ";
+    inorderTraversal(root);
+    cout<<"\npreorderTraversal: ";
+    preorderTraversal(root);
+
     return 0;
 }
