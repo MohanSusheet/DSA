@@ -52,7 +52,7 @@ ListNode* reverse(ListNode* head)
     
     return prev;
 }
-ListNode* addOne(ListNode* head) {
+ListNode* addOneIterative(ListNode* head) {
     //T.C--> O(3N), S.C --> O(1)
     if(head == NULL)return head;
     
@@ -91,6 +91,39 @@ ListNode* addOne(ListNode* head) {
     return head;
 }
 
+int helper(ListNode* head)
+{
+    if(head == nullptr)return 1;
+
+    int carry = helper(head->next);
+
+    head->data += carry;
+
+    if(head->data < 10)
+    {
+        return 0;
+    }
+
+    head->data = head->data % 10;
+    return 1;
+}
+
+ListNode* addOneRecursive(ListNode* head)
+{
+    //T.C --> O(N), S.C --> O(N) stack space
+    ListNode* temp = head;
+
+    int carry = helper(temp);
+
+    if(carry)
+    {
+        ListNode* newHead = new ListNode(1);
+        newHead->next = head;
+        return newHead;
+    }
+    return head;
+}
+
 int main()
 {
     ListNode* n1 = new ListNode(1);
@@ -107,9 +140,13 @@ int main()
     ListNode* head = n1;
     cout<<"List before function call: "; 
     traverseList(head);
-    ListNode* newHead = addOne(head);
+    // ListNode* newHead = addOneIterative(head);
+    ListNode* newHead = addOneRecursive(head);
     cout<<"\nList after function call: ";
     traverseList(newHead);
 
+
+    /*NOTE: Both the solutions have their pro and cons. Neither one is the optmal one
+    */
     return 0;
 }
