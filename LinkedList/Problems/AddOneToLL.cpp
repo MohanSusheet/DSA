@@ -79,15 +79,15 @@ ListNode* addOne(ListNode* head) {
         }
     }
     
+    head = reverse(head); //--> O(N)
+
     if(carry)
     {
         ListNode* newHead = new ListNode(1);
-        head = reverse(head); //--> O(N)
         newHead->next = head;
         return newHead;
     }
     
-    head = reverse(head); //--> O(N)
     return head;
 }
 
