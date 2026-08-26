@@ -53,30 +53,28 @@ ListNode* reverse(ListNode* head)
     return prev;
 }
 ListNode* addOne(ListNode* head) {
+    //T.C--> O(3N), S.C --> O(1)
     if(head == NULL)return head;
     
-    head = reverse(head);
+    head = reverse(head);  //--> O(N)
     
     ListNode* temp = head;
     int carry = 1; //initially 1 as 1 needs to be added to the number
     
-    while(temp)
+    while(temp)  //--> O(N)
     {
         if(temp->data + carry < 10)
         {
-            traverseList(head);
-            cout<<"\nSum is less than 10 : "<<temp->data + carry<<"\n";
-            temp->data = temp->data + carry;
+            int sum = temp->data + carry;
+            temp->data = sum;
             carry = 0;
             break;
         }
         else
         {
-            traverseList(head);
-            cout<<"\nSum is greater than 10 : "<<temp->data + carry<<"\n";
-            carry = (temp->data + carry) / 10;
-            temp->data = (temp->data + carry) % 10;
-            cout<<"Carry : "<<carry<<"\n";
+            int sum = temp->data + carry;
+            carry = sum / 10;
+            temp->data = sum % 10;
             temp = temp->next;
         }
     }
@@ -84,16 +82,12 @@ ListNode* addOne(ListNode* head) {
     if(carry)
     {
         ListNode* newHead = new ListNode(1);
+        head = reverse(head); //--> O(N)
         newHead->next = head;
-        cout<<"List before returning (newHEad): ";
-        traverseList(newHead); cout<<"\n";
         return newHead;
     }
     
-    cout<<"List before returning: ";
-    traverseList(head);
-    cout<<"\n";
-    head = reverse(head);
+    head = reverse(head); //--> O(N)
     return head;
 }
 
@@ -111,8 +105,10 @@ int main()
     // n4->next = n5;
 
     ListNode* head = n1;
-    cout<<"List before function call: "; traverseList(head);cout<<endl;
+    cout<<"List before function call: "; 
+    traverseList(head);
     ListNode* newHead = addOne(head);
+    cout<<"\nList after function call: ";
     traverseList(newHead);
 
     return 0;
