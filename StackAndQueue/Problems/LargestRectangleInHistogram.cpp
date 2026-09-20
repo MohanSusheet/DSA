@@ -89,13 +89,49 @@ int largestRectangleAreaBetter(vector<int>& h) {
     return area;
 }
 
+int largestRectangleAreaOptimal(vector<int>& h) {
+    //Optimal Approach: Determining pse and nse for all the elements on the fly.
+    //using a stack that maintains an increasing order (basically a monotonic stack)
+    //T.C --> O(N[traversal] + N[stack pops]) ~~ O(2N), S.C --> O(N)
+
+    int n = h.size(), maxArea = 0;
+    stack<int> st; // will store indices
+
+    for(int i = 0; i < n; i++)
+    {
+        while(!st.empty() && h[st.top()] > h[i])
+        {
+            int ele = st.top();  //element for which area will be calculated
+            //as nse for ele is "i" and pse is the next top element in the stack
+            st.pop();
+            int nse = i;
+            int pse = st.empty() ? -1 : st.top(); //pse is the next top element in the stack
+            maxArea = max(maxArea, (h[ele] * (nse - pse - 1)));
+        }
+        st.push(i);
+    }
+
+    //at last we need to calculate the area for elements that either don't have nse or pse.
+    //As our above logic did not consider -1 as pse and n as nse for elements
+    while(!st.empty())
+    {
+        int nse = n;
+        int ele = st.top();
+        st.pop();
+        int pse = st.empty() ? -1 : st.top();
+        maxArea = max(maxArea, (h[ele] * (nse - pse - 1)));
+    }
+
+    return maxArea;
+}
+
 int main()
 {
-    vector<int>heights = {2,1,5,6,2,3};
+    vector<int>heights = {3, 2, 10, 11, 5, 10, 6, 3};
 
-    cout<<"MAx Area: "<<largestRectangleAreaBrute(heights);
-    cout<<"MAx Area: "<<largestRectangleAreaBetter(heights);
-    // cout<<"MAx Area: "<<largestRectangleInHistogramOptimal(heights);
+    cout<<"MAx Area: "<<largestRectangleAreaBrute(heights)<<"\n";
+    cout<<"MAx Area: "<<largestRectangleAreaBetter(heights)<<"\n";
+    cout<<"MAx Area: "<<largestRectangleAreaOptimal(heights);
 
     return 0;
 }
