@@ -76,7 +76,7 @@ int longestValidParenthesesOptimal(string s) {
     //Optimal Approach: Space Optimized approach.
     ///Traversing the string and identifying the portion valid portions using 2 Pointers
     //Left and Right. 
-    //T.C --> O(N), S.C --> O(N)
+    //T.C --> O(2*N), S.C --> O(1)
     int n = s.size();
     int maxLen = 0;
     int left = 0, right = 0;
