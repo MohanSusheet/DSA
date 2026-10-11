@@ -60,7 +60,7 @@ int aggressiveCowsOptimal(vector<int> &nums, int k) {
     dist between any 2 consecutive cows.
     Then we try to place the cows with each distance and as "min" dist will always be between any 2 "consecutive" cows.
     */
-    //T.C --> O((max - min) * N), S.C --> O(1)
+    //T.C --> O(log(max - min) * N), S.C --> O(1)
     sort(nums.begin(), nums.end());
     int ans = 0;
     
