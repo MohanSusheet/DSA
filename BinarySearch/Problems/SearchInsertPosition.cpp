@@ -17,14 +17,12 @@ int searchInsertBrute(vector<int>& nums, int target) {
 }
 
 int searchInsertOptimal(vector<int>& nums, int target) {
-    //Optimal Approach : Using binary search
-    //T.C --> O(log n), S.C --> O(1)
+    //Optimal Approach: using Binary search
+    //T.C --> O(logN), S.C --> O(1)
     int n = nums.size();
     if(target < nums[0])return 0;
     if(target > nums[n-1])return n;
     
-    //Optimal Approach: using Binary search
-    //T.C --> O(logN), S.C --> O(1)
     int low = 0, high = n-1, ans = n;
 
     while(low <= high)
