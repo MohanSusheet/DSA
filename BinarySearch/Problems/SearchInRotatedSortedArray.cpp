@@ -41,7 +41,7 @@ int searchOptimal(vector<int>& nums, int target) {
                 low = mid + 1;
             }
         }
-        else //means the right half is sorted
+        else  //means the right half is sorted
         {
             if(nums[mid] <= target && target <= nums[high])
             {
