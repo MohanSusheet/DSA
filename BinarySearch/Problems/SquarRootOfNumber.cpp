@@ -22,7 +22,9 @@ int mySqrtBrute(int x) {
 }
 
 int mySqrtOptimal(int x) {
-    //Optimal Appraoch: using linear seach
+    //Optimal Appraoch: using Binary search on answer
+    //For Scenarios where my desired output is limited to a certain extent and i am sure that
+    //it won't be found beyond that certain point, "BINARY SEARCH ON ANSWER" concept is always applicable in those scenarios    
     //T.C --> O(logN), S.C --> O(1)
 
     int ans = 0;
